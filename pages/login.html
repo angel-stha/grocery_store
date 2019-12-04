@@ -7,8 +7,11 @@
     <title>LOGIN</title>
 </head>
 <body>
-    <input type="text" name="username" placeholder="Username"><br><br>
-    <input type="text" name="password" placeholder="Password"><br><br>
-    <input type="submit">
+    <form action = "login" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username"><br><br>
+        <input type="text" name="password" placeholder="Password"><br><br>
+        <input type="submit">
+    </form>
 </body>
 </html>
