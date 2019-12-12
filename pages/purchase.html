@@ -9,18 +9,145 @@
     <title>Purchase</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'static/css/purchase.css' %}">
+    <style>
+            table, th, td {
+               border: 1px solid black;
+            }
+         </style>
 </head>
 <body>
-    <div class="searchhead">
-        <div class="search">                                                                                                                                                                                                                            
-            <div>S.N.</div>
-            <div>Name of Quantity</div>
-            <div>Quantity</div>
-            <div>Price</div>
-            <div>Total</div>
-            <div>Date</div>
-        </div>
+    
+      
+        <div >
+            <div  id="abc">                                                                                                                                                                                                                            
+                   
+                      </head>
+                         <input type='date'>
+                     
+                         <table id='myTable'>
+                            <tr>
+                               
+                               <th>Name of items</th>
+                               <th>Quantity</th>
+                               <th>Price</th>
+                               <th>Total</th>
+                             
+                            </tr>
+                            <tr>
+                                
+                               
+                               <td><input type ="text" name='items'></td>
+                               <td><input type ="number" id='price' name='price' onchange="total(this)" value='0'></td>
+                               <td><input type ="number" id='quantity' name='quantity' onchange="total(this)" value='0'></td>
+                               <td><input type="number" id='total' name='total' value='0'></td>
+                               <th><button onclick="addRow(this)">+</button></th>
+                            </tr>
+                            
+                         </table>
+                         
+
+   
+    
+       <div>Total: &nbsp;&nbsp;
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;
+     &nbsp;&nbsp;  &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     
+     
+   
+     
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp; &nbsp;&nbsp;
+     &nbsp;&nbsp;
+     &nbsp;&nbsp;
        
-    </div>
+   
+   <input type="text" id ='ftotal' value="0">
+   
+   <form action="buyer" method="GET" id="selection-form">
+      
+      {% csrf_token %}
+         <select>
+            
+            {% for buyer in buyer_list %}
+               <option>
+                   {{ buyer }}
+                   
+               </option>
+               
+            {% endfor %}
+            <option>
+                  Others
+               </option>
+         </select>
+         <select>
+            <option>
+               Cash
+            </option>
+            <option>
+               Credit
+            </option>
+         </select>
+            
+   </form>
+     
+       </div>
+       <script>
+            function addRow(row)
+                {
+                var i = row.parentNode.parentNode.rowIndex;
+                var tr = document.getElementById('myTable').insertRow(1);
+                
+                tr.innerHTML = row.parentNode.parentNode.innerHTML;
+                var inputs = tr.querySelectorAll("input[type='text']");
+                console.log(inputs);
+                for(var i=0; i<inputs.length; i++)
+                    tr.deleteCell(-1);
+                    
+                    inputs[i].value = "";
+
+                }
+            function total(row)
+                {
+                      
+                    var i = document.getElementById('myTable').rows.length
+                    
+                    var price = parseFloat(document.getElementById('price').value)
+                    var quantity = parseFloat(document.getElementById('quantity').value)
+                    var total = price * quantity
+                    document.getElementById('total').value = total
+                    var fttal= (document.getElementById('ftotal').value)
+                    var add = parseFloat(fttal)+parseFloat(total)
+                    console.log(add)
+                    document.getElementById('ftotal').value=add
+                }
+            
+                
+       </script>
+       <button onclick="proceed()">Proceed</button>
+       
 </body>
-</html>
+</html>       
+             
+
